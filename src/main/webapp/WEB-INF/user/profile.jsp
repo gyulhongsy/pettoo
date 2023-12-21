@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,7 @@
 	    </div>
 	</nav>
 </div>
-<div class="myProfile">
+<div class="content">
 <form name="myForm" action="profile.jsp" method="POST">
 <table>
 	<tr>
@@ -43,11 +44,11 @@
 	</tr>
 	<tr>
 		<td height="50">아이디</td>
-		<td colspan=3><input type="text" name="userId" readonly></td>
+		<td colspan=3><input type="text" name="userId" value="${user.userId}" readonly></td>
 	</tr>
 	<tr>
 		<td height="50">비밀번호</td>
-		<td colspan=3><input type="password" name="userPw"></td>
+		<td colspan=3><input type="password" name="userPw" value="${user.userPw}"></td>
 	</tr>
 	<tr>
 		<td height="50">비밀번호 확인</td>
@@ -55,36 +56,42 @@
 	</tr>
 	<tr>
 		<td height="50">이름</td>
-		<td colspan=3><input type="text" name="userName"></td>
+		<td colspan=3><input type="text" name="userName" value="${user.userName}"></td>
 	</tr>
 	<tr>
 		<td height="50">주소</td>
-		<td colspan=3><input type="text" name="address"></td>
+		<td colspan=3><input type="text" name="address" value="${user.address}"></td>
 	</tr>
 	<tr>
 		<td height="50">성별</td>
-		<td colspan=3><input type="radio" name="gender" value="man">남
-		<input type="radio" name="gender" value="woman">여</td>
+		<td colspan=3><input type="radio" name="gender" value="man" <c:if test="${user.gender eq 'man'}">checked</c:if>>남
+		<input type="radio" name="gender" value="woman" <c:if test="${user.gender eq 'woman'}">checked</c:if>>여</td>
 	</tr>
 	<tr>
 		<td height="50">이메일</td>
-		<td colspan=3><input type="email" name="email"></td>
+		<td colspan=3><input type="email" name="email" value="${user.email}"></td>
 	</tr>
 	<tr>
-		<td height="50">전화번호('-'포함하여 입력)</td>
-		<td colspan=3><input type="tel" name="phoneNumber"></td>
+		<td height="50">전화번호('-'포함)</td>
+		<td colspan=3><input type="tel" name="phoneNumber" value="${user.phoneNumber}"></td>
 	</tr>
 	<tr>
 		<td height="50">생일</td>
-		<td colspan=3><input type="date" name="userBirth" min="1950-01-01" max="2023-12-31"></td>
+		<td colspan=3><input type="date" name="userBirth" min="1950-01-01" max="2023-12-31" value="${user.userBirth}"></td>
 	</tr>
 	<tr>
 		<td height="50">펫 아이디</td>
-		<td colspan=3><input type="text" name="petId"></td>
+		<td colspan=3><input type="text" name="petId" value="${user.petId}"></td>
 	</tr>
 	<tr>
 		<td height="50">동아리</td>
-		<td colspan=3></td>
+		<td colspan=3><select name="comm_num">
+			<c:forEach var="comm" items="${commList}">
+				<option value="${comm.comm_num}"
+					<c:if test="${comm.comm_num eq user.comm_num}">selected="selected"</c:if>
+					>${comm.comm_title}</option>
+			</c:forEach></select>
+		</td>
 	<tr>
 		<td colspan=4>
 			<input type="button" value="정보수정" onClick="<c:url value='/user/update' />"> &nbsp;
