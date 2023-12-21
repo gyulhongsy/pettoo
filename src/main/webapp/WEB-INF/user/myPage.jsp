@@ -134,11 +134,11 @@
 </div>
 <div class="content">
 	<div class="profile">
-		<h1 align="center">닉네임</h1>
-		<h3 align="center">소속 커뮤니티</h3>
+		<h1 align="center">${userId}님 안녕하세요!</h1>
+		<h3 align="center">${user.comm_numm}</h3>
 		<h3 align="center">TAKE A WALK WITH</h3>
 		<img src="<c:url value='/images/dog.png' />" alt="이미지">
-		<h3 align="center">순이</h3>
+		<h3 align="center">${userPet}</h3>
 		<h4 align="center">3KG  |  20CM  |  W</h4>		
 	</div>
 	<div class="right">
